@@ -47,7 +47,7 @@ def add_new_task(task: schema.Task_Schema, db: Session = Depends(get_db)):
     return crud.add_task_details_to_db(db=db, task=task)
 
 
-@app.delete('/delete_task_by_id/{id}')
+@app.delete('/delete_task_by_id/{sl_id}')
 def delete_task_by_id(sl_id: int, db: Session = Depends(get_db)):
     details = crud.get_task_by_id(db=db, sl_id=sl_id)
     if not details:
