@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 
 class Task_Schema(BaseModel):
-    id : Optional[int]
+   
     title : str
     note : Optional[str] = None
     isCompleted : int

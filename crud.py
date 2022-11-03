@@ -49,7 +49,7 @@ def add_task_details_to_db(db: Session, task: schema.Task_Schema):
     :return: a dictionary object of the record which has inserted
     """
     task_details = model.Task(
-        id = task.id,
+        
         title = task.title,
         note = task.note,
         isCompleted = task.isCompleted,
