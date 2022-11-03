@@ -36,18 +36,18 @@ def get_db():
         db.close()
 
 
-@app.get('/retrieve_all_task_details', response_model=List[schema.Task_Schema])
+@app.get('/retrieve_all_task_details')
 def retrieve_all_task_details(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     task = crud.get_tasks(db=db, skip=skip, limit=limit)
     return task
 
 
-@app.post('/add_new_task', response_model=schema.Task_Schema)
+@app.post('/add_new_task')
 def add_new_task(task: schema.Task_Schema, db: Session = Depends(get_db)):
     return crud.add_task_details_to_db(db=db, task=task)
 
 
-@app.delete('/delete_task_by_id')
+@app.delete('/delete_task_by_id/{id}')
 def delete_task_by_id(sl_id: int, db: Session = Depends(get_db)):
     details = crud.get_task_by_id(db=db, sl_id=sl_id)
     if not details:
@@ -60,7 +60,7 @@ def delete_task_by_id(sl_id: int, db: Session = Depends(get_db)):
     return {"delete status": "success"}
 
 
-@app.put('/update_task_details', response_model=schema.Task_Schema)
+@app.put('/update_task_details/{id}')
 def update_task_details(sl_id: int, update_param: schema.Task_Schema, db: Session = Depends(get_db)):
     details = crud.get_task_by_id(db=db, sl_id=sl_id)
     if not details:
