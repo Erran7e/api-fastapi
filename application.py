@@ -4,6 +4,8 @@
 #  ------------------------------------------------------------------------------------------------
 # This is an API. which are having four end points to perform the CRUD operation with SQLite
 #  ------------------------------------------------------------------------------------------------
+
+# uvicorn application:app --reload
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -13,6 +15,7 @@ import crud
 import model
 import schema
 from db_handler import SessionLocal, engine
+
 
 model.Base.metadata.create_all(bind=engine)
 
@@ -64,3 +67,5 @@ def update_task_details(sl_id: int, update_param: schema.Task_Schema, db: Sessio
         raise HTTPException(status_code=404, detail=f"No record found to update")
 
     return crud.update_task_details(db=db, details=update_param, sl_id=sl_id)
+
+
